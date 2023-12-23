@@ -42,126 +42,57 @@ const SingUp = () => {
     }
   };
 
-  const roleOptions = [
-    {
-      label: "House Renter",
-      value: "house_renter",
-    },
-    {
-      label: "House Owner",
-      value: "house_owner",
-    },
-  ];
   return (
-    <div className="bg-gradient-to-r from-gray-200 to-blue-400 h-full opacity-75 ">
+    <div className="h-full opacity-75 ">
       <div>
         <div className="mx-4 flex justify-center items-center h-[90vh]">
           <Form submitHandler={onSubmit} resolver={yupResolver(userSchema)}>
-            <p
+            <div>
+              <FormInput
+                name="name"
+                type="tex"
+                size="large"
+                placeholder="Enter Your Name"
+                label="Name"
+              />
+            </div>
+            <div>
+              <FormInput
+                name="email"
+                type="email"
+                size="large"
+                placeholder="Enter Your Email"
+                label="Email"
+              />
+            </div>
+            <div
+              className="w-72 md:w-96"
               style={{
-                fontSize: "18px",
-                marginBottom: "10px",
+                margin: "15px 0px",
               }}
             >
-              User Information
-            </p>
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-              <Col
-                className="gutter-row"
-                span={8}
-                style={{
-                  marginBottom: "10px",
-                }}
+              <FormInput
+                name="password"
+                type="password"
+                size="large"
+                placeholder="Enter Your Password"
+                label="Password"
+              />
+            </div>
+            <div className="text-center ">
+              <Button
+                className="w-full"
+                type="primary"
+                size="large"
+                htmlType="submit"
               >
-                <FormInput type="text" name="name" size="large" label="Name" />
-              </Col>
-              <Col
-                className="gutter-row"
-                span={8}
-                style={{
-                  marginBottom: "10px",
-                }}
-              >
-                <FormInput
-                  type="email"
-                  name="email"
-                  size="large"
-                  label="Email"
-                />
-              </Col>
-              <Col
-                className="gutter-row"
-                span={8}
-                style={{
-                  marginBottom: "10px",
-                }}
-              >
-                <FormInput
-                  type="text"
-                  name="contactNumber"
-                  size="large"
-                  label="Contact Numbe"
-                />
-              </Col>
-              <Col
-                className="gutter-row"
-                span={12}
-                style={{
-                  marginBottom: "10px",
-                }}
-              >
-                <FormSelectField
-                  name="role"
-                  size="large"
-                  label="Role"
-                  options={roleOptions}
-                />
-              </Col>
-              <Col
-                className="gutter-row"
-                span={12}
-                style={{
-                  marginBottom: "10px",
-                }}
-              >
-                <FormInput
-                  type="password"
-                  name="password"
-                  size="large"
-                  label="Password"
-                />
-              </Col>
-
-              <Col
-                className="gutter-row"
-                span={24}
-                style={{
-                  marginBottom: "10px",
-                }}
-              >
-                <FormInput
-                  type="text"
-                  name="profileImage"
-                  size="large"
-                  label="Profile Image Link"
-                />
-              </Col>
-              <Col
-                className="gutter-row"
-                span={24}
-                style={{
-                  marginBottom: "10px",
-                }}
-              >
-                <FormTextArea name="address" label="Address" />
-              </Col>
-            </Row>
-            <div className="text-center">
-              <Button type="primary" size="large" htmlType="submit">
                 Sign Up
               </Button>
             </div>
-            <Link href={"/login"} className="no-underline hover:underline">
+            <Link
+              href={"/login"}
+              className="hover:text-blue-500 no-underline hover:underline"
+            >
               Already have Account?
             </Link>
           </Form>

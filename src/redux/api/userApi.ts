@@ -8,13 +8,20 @@ export const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     addUser: build.mutation({
       query: (data) => ({
-        url: `${USER_URL}/create-user`,
+        url: `/auth/signup`,
         method: "POST",
         data,
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.auth],
     }),
-
+    login: build.mutation({
+      query: (data) => ({
+        url: `/auth/signin`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: [tagTypes.auth],
+    }),
     getUsers: build.query({
       query: (arg: Record<string, any>) => ({
         url: USER_URL,
@@ -27,14 +34,14 @@ export const userApi = baseApi.injectEndpoints({
           meta,
         };
       },
-      providesTags: [tagTypes.user],
+      providesTags: [tagTypes.performer],
     }),
     getSingUser: build.query({
       query: () => ({
         url: `${USER_URL}/user`,
         method: "GET",
       }),
-      providesTags: [tagTypes.user],
+      providesTags: [tagTypes.performer],
     }),
     updateMyProfile: build.mutation({
       query: (data) => ({
@@ -42,7 +49,7 @@ export const userApi = baseApi.injectEndpoints({
         method: "PATCH",
         data: data,
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.performer],
     }),
     makeAdmin: build.mutation({
       query: (data) => ({
@@ -50,20 +57,21 @@ export const userApi = baseApi.injectEndpoints({
         method: "PATCH",
         data: data.body,
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.performer],
     }),
     deleteUser: build.mutation({
       query: (id) => ({
         url: `${USER_URL}/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.performer],
     }),
   }),
 });
 
 export const {
   useAddUserMutation,
+  useLoginMutation,
   useGetSingUserQuery,
   useGetUsersQuery,
   useDeleteUserMutation,

@@ -36,59 +36,6 @@ const NavbarBtn = ({ flexDir, showDrawer }: navBtnProps) => {
 
   return (
     <div className={`flex ${flexDir}`}>
-      <Link
-        className="text-center  border-solid border-[1px] rounded-md border-blue-500 m-1 "
-        href={"/houses"}
-      >
-        <Button
-          onClick={showDrawer}
-          type="link"
-          className="text-white hover:text-blue-500"
-          icon={<HomeOutlined />}
-        >
-          All Houses
-        </Button>
-      </Link>
-      <Link
-        className="text-center  border-solid border-[1px] rounded-md border-blue-500 m-1 "
-        href={"/category"}
-      >
-        <Button
-          onClick={showDrawer}
-          className="text-white hover:text-blue-500"
-          type="link"
-          icon={<OrderedListOutlined />}
-        >
-          Categories
-        </Button>
-      </Link>
-      <Link
-        className="text-center  border-solid border-[1px] rounded-md border-blue-500 m-1 "
-        href={"/blog"}
-      >
-        <Button
-          onClick={showDrawer}
-          className="text-white hover:text-blue-500"
-          type="link"
-          icon={<ReadOutlined />}
-        >
-          Blog
-        </Button>
-      </Link>
-
-      <Link
-        className="text-center  border-solid border-[1px] rounded-md border-blue-500 m-1 "
-        href={"/about"}
-      >
-        <Button
-          onClick={showDrawer}
-          className="text-white hover:text-blue-500"
-          type="link"
-          icon={<HeartOutlined />}
-        >
-          About Us
-        </Button>
-      </Link>
       {isLoggedIn && (
         <Link
           className="text-center  border-solid border-[1px] rounded-md border-blue-500 m-1 "

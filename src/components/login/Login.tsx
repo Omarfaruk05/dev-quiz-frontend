@@ -5,7 +5,6 @@ import { Button, message } from "antd";
 import Form from "@/components/forms/Form";
 import FormInput from "@/components/forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
-import { useUserLoginMutation } from "@/redux/api/authApi";
 import { getUserInfo, storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -13,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "@/redux/slice/userSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "@/schemas/user";
+import { useLoginMutation } from "@/redux/api/userApi";
 
 type FromValues = {
   email: string;
@@ -20,7 +20,7 @@ type FromValues = {
 };
 
 const LoginPage = () => {
-  const [userlogin] = useUserLoginMutation();
+  const [login] = useLoginMutation();
   const dispatch = useDispatch();
 
   const router = useRouter();
@@ -29,13 +29,14 @@ const LoginPage = () => {
     try {
       message.loading("Please wait");
 
-      const res = await userlogin({ ...data }).unwrap();
+      const res = await login({ ...data }).unwrap();
+      console.log(res);
 
       if (res?.errorMessages) {
         message.error(`${res?.errorMessages}`);
       }
 
-      if (res?.accessToken) {
+      if (res) {
         router.push("/");
         message.success("Login Successfull.");
         await storeUserInfo({ accessToken: res?.accessToken });
@@ -51,7 +52,7 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className=" bg-gradient-to-r from-gray-200 to-blue-400 h-full opacity-75 ">
+    <div className="h-full opacity-75 ">
       <div className=" flex justify-center items-center h-[90vh]">
         <Form submitHandler={onSubmit} resolver={yupResolver(loginSchema)}>
           <div>
@@ -85,7 +86,10 @@ const LoginPage = () => {
           >
             Login
           </Button>
-          <Link href={"/signup"} className="no-underline hover:underline">
+          <Link
+            href={"/signup"}
+            className="hover:text-blue-500 no-underline hover:underline"
+          >
             Want to creat Account?
           </Link>
         </Form>
