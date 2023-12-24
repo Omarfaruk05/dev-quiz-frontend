@@ -1,23 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { UserOutlined } from "@ant-design/icons";
 import Loading from "@/app/loading";
 import { useGetSingUserQuery } from "@/redux/api/userApi";
 import { getUserInfo } from "@/services/auth.service";
-import { Button, Image } from "antd";
+import { Avatar, Button, Image } from "antd";
 import Link from "next/link";
 import React from "react";
 
 const ProfilePage = () => {
   const { id } = getUserInfo() as any;
   const { data, isLoading } = useGetSingUserQuery(id);
+
   console.log(data);
   if (isLoading) {
     return <Loading></Loading>;
   }
   return (
     <div>
-      <div className="bg-slate-200 p-2 rounded-md shadow-lg w-fit mt-40 md:flex flex-col-reverse gap-8 justify-center items-center mx-auto">
+      <div className="bg-slate-200 p-2 rounded-md shadow-lg w-fit mt-40 md:flex flex-col-reverse gap-2 justify-center items-center mx-auto">
         <div className="p-4">
           <h1>
             Name: <span>{data?.name}</span>
@@ -47,7 +49,7 @@ const ProfilePage = () => {
             />
           ) : (
             <div>
-              <h1>No Profile Image</h1>
+              <Avatar size={120} icon={<UserOutlined />} />
             </div>
           )}
         </div>

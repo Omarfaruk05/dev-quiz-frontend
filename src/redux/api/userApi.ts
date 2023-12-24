@@ -23,42 +23,28 @@ export const userApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.auth],
     }),
     getUsers: build.query({
-      query: (arg: Record<string, any>) => ({
+      query: () => ({
         url: USER_URL,
         method: "GET",
-        params: arg,
       }),
-      transformResponse: (response, meta: IMeta) => {
-        return {
-          users: response,
-          meta,
-        };
-      },
       providesTags: [tagTypes.performer],
     }),
     getSingUser: build.query({
-      query: () => ({
-        url: `${USER_URL}/user`,
+      query: (id: any) => ({
+        url: `${USER_URL}/${id}`,
         method: "GET",
       }),
       providesTags: [tagTypes.performer],
     }),
     updateMyProfile: build.mutation({
-      query: (data) => ({
-        url: `${USER_URL}/update-profile`,
+      query: ({ id, ...updatedData }) => ({
+        url: `${USER_URL}/${id}`,
         method: "PATCH",
-        data: data,
+        data: updatedData,
       }),
       invalidatesTags: [tagTypes.performer],
     }),
-    makeAdmin: build.mutation({
-      query: (data) => ({
-        url: `${USER_URL}/${data?.id}`,
-        method: "PATCH",
-        data: data.body,
-      }),
-      invalidatesTags: [tagTypes.performer],
-    }),
+
     deleteUser: build.mutation({
       query: (id) => ({
         url: `${USER_URL}/${id}`,
@@ -76,5 +62,4 @@ export const {
   useGetUsersQuery,
   useDeleteUserMutation,
   useUpdateMyProfileMutation,
-  useMakeAdminMutation,
 } = userApi;

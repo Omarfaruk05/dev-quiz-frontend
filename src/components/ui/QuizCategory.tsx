@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import Loading from "@/app/loading";
 import { useGetAllQuizQuery } from "@/redux/api/quizApi";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,11 +11,7 @@ const QuizCategory = () => {
   const { data, isLoading } = useGetAllQuizQuery(undefined);
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen">
-        <h3>Loading..</h3>
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <div className="min-h-[73.5vh]">

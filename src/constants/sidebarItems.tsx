@@ -23,8 +23,8 @@ const sidebarItems = (role: string) => {
     ...defaultSidebarItems,
 
     {
-      label: <Link href={`/dashboard/${role}/booking`}>My Scors</Link>,
-      key: "all-bookings",
+      label: <Link href={`/dashboard/${role}/score`}>My Scores</Link>,
+      key: "score",
       icon: <OrderedListOutlined />,
     },
   ];
