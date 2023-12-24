@@ -3,11 +3,12 @@
 
 import Loading from "@/app/loading";
 import { useGetAllQuizQuery } from "@/redux/api/quizApi";
-import Image from "next/image";
+import { getUserInfo } from "@/services/auth.service";
 import Link from "next/link";
 import React from "react";
 
 const QuizCategory = () => {
+  const { id } = getUserInfo() as any;
   const { data, isLoading } = useGetAllQuizQuery(undefined);
 
   if (isLoading) {
@@ -21,7 +22,7 @@ const QuizCategory = () => {
       <div className="flex gap-4 flex-wrap justify-center mt-12">
         {data &&
           data?.map((quiz: any, index: any) => (
-            <Link key={index} href={`quiz/${quiz?.id}`}>
+            <Link key={index} href={id ? `quiz/${quiz?.id}` : "/login"}>
               {" "}
               <div className="bg-gray-800 py-2 px-6 cursor-pointer text-white text-center rounded-md shadow-md hover:shadow-xl hover:rounded-xl trnasition duration-200">
                 <div>

@@ -26,12 +26,12 @@ const Header = () => {
           </Button>
         </Link>
 
-        <div className=" hidden lg:block">
+        <div className=" hidden md:block">
           <NavbarBtn showDrawer={function () {}} />
         </div>
         <Button
           size="middle"
-          className="text-white block lg:hidden hover:text-blue-500"
+          className="text-white block md:hidden hover:text-blue-500"
           type="link"
           icon={<MenuUnfoldOutlined />}
           onClick={showDrawer}
