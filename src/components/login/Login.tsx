@@ -79,9 +79,8 @@ const LoginPage = () => {
             />
           </div>
           <Button
-            className="w-full mb-2"
+            className="w-full mb-2 text-white bg-slate-900"
             size="large"
-            type="primary"
             htmlType="submit"
           >
             Login

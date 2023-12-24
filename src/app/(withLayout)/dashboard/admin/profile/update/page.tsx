@@ -142,7 +142,12 @@ const UpdateProfilePage = () => {
               </Col>
             </Row>
             <div className="text-center">
-              <Button type="primary" size="large" htmlType="submit">
+              <Button
+                className="text-white bg-slate-800"
+                type="primary"
+                size="large"
+                htmlType="submit"
+              >
                 Submit
               </Button>
             </div>

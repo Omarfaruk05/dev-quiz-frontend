@@ -32,17 +32,17 @@ const sidebarItems = (role: string) => {
   const adminSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: <p>All Users</p>,
-      key: "all-users",
+      label: <Link href={`/dashboard/${role}/user`}>All User</Link>,
+      key: "all-user",
       icon: <TableOutlined />,
     },
     {
-      label: <Link href={`/dashboard/${role}/all-house`}>All Quiz</Link>,
+      label: <Link href={`/dashboard/${role}/quiz`}>All Quiz</Link>,
       key: "all-Quiz",
       icon: <HomeOutlined />,
     },
     {
-      label: <Link href={`/dashboard/${role}/booked-house`}>All Question</Link>,
+      label: <Link href={`/dashboard/${role}/question`}>All Question</Link>,
       key: "all-Question",
       icon: <AppstoreOutlined />,
     },

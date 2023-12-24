@@ -81,8 +81,7 @@ const SingUp = () => {
             </div>
             <div className="text-center ">
               <Button
-                className="w-full"
-                type="primary"
+                className="w-full text-white bg-slate-900"
                 size="large"
                 htmlType="submit"
               >

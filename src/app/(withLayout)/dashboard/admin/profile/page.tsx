@@ -54,7 +54,7 @@ const ProfilePage = () => {
       </div>
       <div className="mt-4 text-center w-full">
         <Link href={`/dashboard/${data?.role}/profile/update`}>
-          <Button type="primary">Update Profile</Button>
+          <Button className="text-white bg-slate-800">Update Profile</Button>
         </Link>
       </div>
     </div>

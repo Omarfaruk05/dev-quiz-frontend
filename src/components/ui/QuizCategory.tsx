@@ -10,6 +10,7 @@ import React from "react";
 const QuizCategory = () => {
   const { id } = getUserInfo() as any;
   const { data, isLoading } = useGetAllQuizQuery(undefined);
+  console.log(data);
 
   if (isLoading) {
     return <Loading />;

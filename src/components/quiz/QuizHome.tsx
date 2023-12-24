@@ -22,6 +22,8 @@ const QuizHome = ({ id }: { id: string }) => {
 
   const questions: any = data?.questions;
 
+  console.log(user);
+
   useEffect(() => {
     if (user) {
       const match = user?.scores.some(
