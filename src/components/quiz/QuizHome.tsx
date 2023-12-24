@@ -1,5 +1,5 @@
 "use client";
-import { Button, message, Steps, theme, Checkbox, Divider } from "antd";
+import { Button, message, Steps, theme } from "antd";
 import { useGetSingQuizQuery } from "@/redux/api/quizApi";
 import { useEffect, useState } from "react";
 import Loading from "@/app/loading";
@@ -7,12 +7,23 @@ import { useCreateScoreMutation } from "@/redux/api/scoreApi";
 import { getUserInfo } from "@/services/auth.service";
 import { useGetSingUserQuery } from "@/redux/api/userApi";
 
+//function for random question options
+function shuffleArray(array: any) {
+  let shuffledArray = array.slice(); // Create a copy to avoid modifying the original array
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+}
+
 const QuizHome = ({ id }: { id: string }) => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [exam, setExam] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState();
+  const [shuffledData, setShuffledData] = useState([]);
 
   const { id: userId } = getUserInfo() as any;
 
@@ -25,6 +36,11 @@ const QuizHome = ({ id }: { id: string }) => {
   console.log(user);
 
   useEffect(() => {
+    if (data) {
+      const options = questions[current]?.options;
+      setShuffledData(shuffleArray(options));
+    }
+
     if (user) {
       const match = user?.scores.some(
         (score: any) => score.quizId === data?.id
@@ -40,7 +56,7 @@ const QuizHome = ({ id }: { id: string }) => {
         setExam(match);
       }
     }
-  }, [user, data?.id]);
+  }, [user, data?.id, current, questions, data]);
 
   if (isLoading) {
     return <Loading />;
@@ -121,7 +137,7 @@ const QuizHome = ({ id }: { id: string }) => {
             </h2>
 
             <div className="mt-20">
-              {questions[current]?.options.map((option: any, index: any) => (
+              {shuffledData.map((option: any, index: any) => (
                 <div className="ml-12" key={index}>
                   <p
                     onClick={() => handleOptionClick(option)}
